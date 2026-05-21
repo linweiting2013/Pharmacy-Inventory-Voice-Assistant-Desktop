@@ -1,5 +1,9 @@
 # 🏥 醫院藥局語音盤點助理 (Inventory Voice Assistant)
 
+[![🏥 醫院藥局語音盤點助理 - 示範影片](https://img.youtube.com/vi/wtBUhhXFABY/maxresdefault.jpg)](https://youtu.be/wtBUhhXFABY?si=o9Pm0oG48llfc2qu)
+
+*🎬 [點此在 YouTube 觀看測試與示範影片](https://youtu.be/wtBUhhXFABY?si=o9Pm0oG48llfc2qu)*
+
 這是一款專為醫院藥局設計的桌面端語音應用程式。透過串接 Google 最先進的 **Gemini 3.1 Flash Live API** 與 **Google Sheets API**，能自動透過自然語言對話與藥師互動，聽取盤點數量並即時更新至雲端試算表。
 
 它成功將傳統「兩人一組（一人報數、一人抄寫）」的盤點作業，簡化為「一人語音獨立作業」，大幅釋放藥師人力。
