@@ -1,0 +1,5 @@
+google-genai
+gspread
+google-auth
+pyaudio
+customtkinter
