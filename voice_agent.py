@@ -74,14 +74,16 @@ class VoiceAgent:
         return [{"function_declarations": [
             {
                 "name": "update_drug_quantity",
-                "description": "當藥師回報數量時，更新目前列(row_index)的數量",
+                "description": "當藥師回報數量或修改包裝單位含量（每盒幾顆/每片幾顆）時，更新目前列(row_index)的數量或單位含量",
                 "parameters": {
                     "type": "OBJECT",
                     "properties": {
                         "row_index": {"type": "INTEGER", "description": "要更新的試算表列號(必須大於等於2)"},
                         "box": {"type": "INTEGER", "description": "數量(盒/罐/束)，必須是純數字"},
                         "blister": {"type": "INTEGER", "description": "數量(片)，必須是純數字"},
-                        "pill": {"type": "INTEGER", "description": "數量(顆)，必須是純數字"}
+                        "pill": {"type": "INTEGER", "description": "數量(顆)，必須是純數字"},
+                        "unit_box": {"type": "INTEGER", "description": "單位含量(每盒/罐/束幾顆)，必須是純數字"},
+                        "unit_blister": {"type": "INTEGER", "description": "單位含量(每片幾顆)，必須是純數字"}
                     },
                     "required": ["row_index"]
                 }
@@ -267,13 +269,15 @@ class VoiceAgent:
                                 
                                 try:
                                     if name == "update_drug_quantity":
-                                        self.log_callback(f"系統：助理正在更新第 {args.get('row_index')} 列的數量...")
+                                        self.log_callback(f"系統：助理正在更新第 {args.get('row_index')} 列的數量或單位含量...")
                                         success = await asyncio.to_thread(
                                             self.sheets_client.update_drug_quantity,
                                             row_index=args.get('row_index'),
                                             box=args.get('box'),
                                             blister=args.get('blister'),
-                                            pill=args.get('pill')
+                                            pill=args.get('pill'),
+                                            unit_box=args.get('unit_box'),
+                                            unit_blister=args.get('unit_blister')
                                         )
                                         result_text = "Success" if success else "Failed"
                                         

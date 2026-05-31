@@ -96,12 +96,14 @@ class SheetsClient:
                 data.append(row_data)
         return data
 
-    def update_drug_quantity(self, row_index, box=None, blister=None, pill=None):
+    def update_drug_quantity(self, row_index, box=None, blister=None, pill=None, unit_box=None, unit_blister=None):
         """
-        更新指定列的數量。
+        更新指定列的數量或單位含量。
         box: 數量(盒/罐/束) -> Col 4 (D)
         blister: 數量(片) -> Col 5 (E)
         pill: 數量(顆) -> Col 6 (F)
+        unit_box: 單位含量(每盒幾顆) -> Col 7 (G)
+        unit_blister: 單位含量(每片幾顆) -> Col 8 (H)
         """
         updates = []
         if box is not None:
@@ -110,6 +112,10 @@ class SheetsClient:
             updates.append({'range': f'E{row_index}', 'values': [[blister]]})
         if pill is not None:
             updates.append({'range': f'F{row_index}', 'values': [[pill]]})
+        if unit_box is not None:
+            updates.append({'range': f'G{row_index}', 'values': [[unit_box]]})
+        if unit_blister is not None:
+            updates.append({'range': f'H{row_index}', 'values': [[unit_blister]]})
             
         if updates:
             self.sheet.batch_update(updates)
